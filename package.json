@@ -1,0 +1,14 @@
+{
+  "name": "minimal-blog",
+  "version": "1.0.0",
+  "description": "A minimal, SEO-friendly blog system",
+  "scripts": {
+    "new-post": "node blog-generator.js create",
+    "generate-sitemap": "node sitemap-generator.js",
+    "dev": "python -m http.server 8000",
+    "build": "npm run generate-sitemap"
+  },
+  "keywords": ["blog", "minimal", "seo", "static"],
+  "author": "Mahmoudxyz",
+  "license": "MIT"
+}

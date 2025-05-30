@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yoursite.com/sitemap.xml
+
+# Disallow search parameters
+Disallow: /*?q=*
