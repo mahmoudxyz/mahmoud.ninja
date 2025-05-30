@@ -5,10 +5,11 @@
   "scripts": {
     "new-post": "node blog-generator.js create",
     "generate-sitemap": "node sitemap-generator.js",
-    "dev": "python -m http.server 8000",
-    "build": "npm run generate-sitemap"
+    "copy-files": "node build-script.js",
+    "build": "npm run generate-sitemap && npm run copy-files",
+    "dev": "python -m http.server 8000"
   },
   "keywords": ["blog", "minimal", "seo", "static"],
-  "author": "Mahmoudxyz",
+  "author": "Mahmoud Ahmed",
   "license": "MIT"
 }
