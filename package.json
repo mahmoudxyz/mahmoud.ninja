@@ -5,7 +5,7 @@
   "scripts": {
     "new-post": "node blog-generator.js create",
     "generate-sitemap": "node sitemap-generator.js",
-    "build": "npm run generate-sitemap",
+    "build": "npm run generate-sitemap && npm run copy-files",
     "dev": "python dev-server.py 8000",
     "dev:simple": "python -m http.server 8000",
     "maintenance:on": "node -e \"require('./maintenance-toggle.js'); MaintenanceManager.enable(2)\"",
