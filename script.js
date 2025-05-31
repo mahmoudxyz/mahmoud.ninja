@@ -251,3 +251,20 @@ function generateMetaTags(post) {
         <link rel="canonical" href="${window.location.href}">
     `;
 }
+
+// Include router functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Existing initialization code...
+    
+    // Add offline detection
+    if (!navigator.onLine) {
+        window.location.href = '/offline.html';
+    }
+    
+    // Add feature flag checking for certain pages
+    if (window.location.pathname.includes('newsletter')) {
+        if (!window.featureFlags?.isEnabled('newsletter')) {
+            window.location.href = '/coming-soon.html';
+        }
+    }
+});

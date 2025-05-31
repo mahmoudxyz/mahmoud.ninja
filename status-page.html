@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status - Mahmoud Ahmed</title>
+    <meta name="description" content="Site status and system health">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .status-grid {
+            display: grid;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .status-item {
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .status-name {
+            font-weight: 600;
+            color: #000;
+        }
+        
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-operational {
+            background: #dcfce7;
+            color: #166534;
+        }
+        
+        .status-degraded {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .status-down {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .status-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .incident {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+        
+        .incident-title {
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="/index.html" class="logo">Mahmoud Ahmed</a>
+            <ul class="nav-links">
+                <li><a href="/index.html">Writing</a></li>
+                <li><a href="/search.html">Search</a></li>
+                <li><a href="/about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <a href="/index.html" class="back-link">← Back</a>
+        
+        <div class="post-header">
+            <h1>System Status</h1>
+            <p>Current status of all blog systems and features</p>
+        </div>
+
+        <div id="overall-status" class="incident" style="display: none;">
+            <div class="incident-title">Current Incident</div>
+            <div id="incident-description"></div>
+        </div>
+
+        <div class="status-grid" id="statusGrid">
+            <!-- Status items will be populated by JavaScript -->
+        </div>
+        
+        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee;">
+            <h2 style="margin-bottom: 1rem;">Recent Incidents</h2>
+            <div id="incident-history">
+                <p style="color: #666;">No recent incidents. Everything is running smoothly!</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 Mahmoud Ahmed</p>
+    </footer>
+
+    <script>
+        class StatusMonitor {
+            constructor() {
+                this.systems = [
+                    {
+                        name: 'Blog Website',
+                        id: 'website',
+                        description: 'Main blog and articles',
+                        url: '/'
+                    },
+                    {
+                        name: 'Search Function',
+                        id: 'search',
+                        description: 'Post search functionality',
+                        url: '/search.html'
+                    },
+                    {
+                        name: 'RSS Feed',
+                        id: 'rss',
+                        description: 'RSS feed for posts',
+                        url: '/rss.xml'
+                    },
+                    {
+                        name: 'API Endpoints',
+                        id: 'api',
+                        description: 'Data and content APIs',
+                        url: '/data/posts.json'
+                    }
+                ];
+                
+                this.checkAllSystems();
+                setInterval(() => this.checkAllSystems(), 30000); // Check every 30 seconds
+            }
+            
+            async checkAllSystems() {
+                const statusGrid = document.getElementById('statusGrid');
+                statusGrid.innerHTML = '';
+                
+                for (const system of this.systems) {
+                    const status = await this.checkSystem(system);
+                    statusGrid.appendChild(this.createStatusItem(system, status));
+                }
+                
+                this.updateOverallStatus();
+            }
+            
+            async checkSystem(system) {
+                try {
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 5000);
+                    
+                    const response = await fetch(system.url, {
+                        method: 'HEAD',
+                        signal: controller.signal
+                    });
+                    
+                    clearTimeout(timeoutId);
+                    
+                    if (response.ok) {
+                        return { status: 'operational', responseTime: Date.now() };
+                    } else {
+                        return { status: 'degraded', error: `HTTP ${response.status}` };
+                    }
+                } catch (error) {
+                    if (error.name === 'AbortError') {
+                        return { status: 'down', error: 'Timeout' };
+                    }
+                    return { status: 'down', error: error.message };
+                }
+            }
+            
+            createStatusItem(system, result) {
+                const item = document.createElement('div');
+                item.className = 'status-item';
+                
+                const statusClass = `status-${result.status}`;
+                const statusText = {
+                    operational: 'Operational',
+                    degraded: 'Degraded',
+                    down: 'Down'
+                }[result.status];
+                
+                item.innerHTML = `
+                    <div class="status-header">
+                        <div class="status-name">${system.name}</div>
+                        <div class="status-badge ${statusClass}">${statusText}</div>
+                    </div>
+                    <div class="status-description">
+                        ${system.description}
+                        ${result.error ? ` - ${result.error}` : ''}
+                    </div>
+                `;
+                
+                return item;
+            }
+            
+            updateOverallStatus() {
+                // This is where you'd check for any current incidents
+                // For demo, we'll just hide the incident banner
+                document.getElementById('overall-status').style.display = 'none';
+            }
+        }
+        
+        // Initialize status monitor
+        new StatusMonitor();
+    </script>
+</body>
+</html>

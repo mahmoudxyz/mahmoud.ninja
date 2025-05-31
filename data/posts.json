@@ -1,8 +1,24 @@
 {
   "posts": [
-    
+    {
+      "id": "take-the-money-and-dont-miss-the-chance",
+      "title": "Take the money, and don't miss the chance",
+      "slug": "take-the-money-and-dont-miss-the-chance",
+      "category": "thoughts",
+      "categoryName": "thoughts",
+      "date": "2025-05-31",
+      "excerpt": "people think using fomo, and I think long term",
+      "tags": [
+        "thougths",
+        "personal"
+      ],
+      "readTime": "1 min read",
+      "featured": true,
+      "seo": {
+        "description": "people think using fomo, and I think long term",
+        "keywords": "thoughts, personal, invest-in-yourself"
+      }
+    }
   ],
-  "categories": [
-    
-  ]
+  "categories": []
 }

@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yoursite.com/sitemap.xml
+Sitemap: https://mahmoud.ninja/sitemap.xml
 
 # Disallow search parameters
 Disallow: /*?q=*

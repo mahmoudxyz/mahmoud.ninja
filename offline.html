@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline | Mahmoud Ahmed</title>
+    <meta name="description" content="You're currently offline.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .offline-container {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .offline-icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            opacity: 0.5;
+        }
+        
+        .offline-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 1rem;
+        }
+        
+        .offline-description {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        .retry-button {
+            padding: 0.75rem 1.5rem;
+            background: #000;
+            color: #fff;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        
+        .retry-button:hover {
+            background: #333;
+        }
+        
+        .connection-status {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f5f5f5;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        
+        .status-online {
+            color: #22c55e;
+        }
+        
+        .status-offline {
+            color: #ef4444;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="/index.html" class="logo">Mahmoud Ahmed</a>
+            <ul class="nav-links">
+                <li><a href="/index.html">Writing</a></li>
+                <li><a href="/search.html">Search</a></li>
+                <li><a href="/about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="offline-container">
+            <div class="offline-icon">📡</div>
+            <h1 class="offline-title">You're Offline</h1>
+            <p class="offline-description">
+                Looks like your internet connection took a coffee break. Don't worry, even the best networks need debugging sometimes. 
+                Check your connection and try again!
+            </p>
+            
+            <button class="retry-button" onclick="window.location.reload()">
+                Retry Connection
+            </button>
+            
+            <div class="connection-status">
+                <span id="connectionStatus">Checking connection...</span>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 Mahmoud Ahmed</p>
+    </footer>
+
+    <script>
+        function updateConnectionStatus() {
+            const statusElement = document.getElementById('connectionStatus');
+            
+            if (navigator.onLine) {
+                statusElement.textContent = 'Back online! ';
+                statusElement.className = 'status-online';
+                
+                // Auto-reload when back online
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            } else {
+                statusElement.textContent = 'Still offline';
+                statusElement.className = 'status-offline';
+            }
+        }
+        
+        // Check connection status
+        updateConnectionStatus();
+        
+        // Listen for connection changes
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+        
+        // Check periodically
+        setInterval(updateConnectionStatus, 5000);
+    </script>
+</body>
+</html>

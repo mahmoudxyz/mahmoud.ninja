@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 class SitemapGenerator {
-    constructor(baseUrl = 'https://yoursite.com') {
+    constructor(baseUrl = 'https://mahmoud.ninja') {
         this.baseUrl = baseUrl;
         this.postsData = this.loadPostsData();
     }

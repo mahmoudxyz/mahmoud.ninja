@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Mahmoud Ahmed</title>
+    <meta name="description" content="Oops! The page you're looking for doesn't exist.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .error-container {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 600;
+            color: #ddd;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+        
+        .error-message {
+            font-size: 1.5rem;
+            color: #000;
+            margin-bottom: 1rem;
+        }
+        
+        .error-description {
+            color: #666;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .error-link {
+            padding: 0.75rem 1.5rem;
+            background: #000;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+        
+        .error-link:hover {
+            background: #333;
+        }
+        
+        .error-link.secondary {
+            background: #fff;
+            color: #000;
+            border: 1px solid #ddd;
+        }
+        
+        .error-link.secondary:hover {
+            background: #f5f5f5;
+        }
+        
+        @media (max-width: 600px) {
+            .error-code {
+                font-size: 5rem;
+            }
+            
+            .error-message {
+                font-size: 1.2rem;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="/index.html" class="logo">Mahmoud Ahmed</a>
+            <ul class="nav-links">
+                <li><a href="/index.html">Writing</a></li>
+                <li><a href="/search.html">Search</a></li>
+                <li><a href="/about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="error-container">
+            <div class="error-code">404</div>
+            <h1 class="error-message">Well, this is awkward...</h1>
+            <p class="error-description">
+                Looks like you've wandered into the digital equivalent of a pharmacy's "discontinued items" section. 
+                This page either never existed or went on a permanent coffee break.
+            </p>
+            
+            <div class="error-actions">
+                <a href="/index.html" class="error-link">Go Home</a>
+                <a href="/search.html" class="error-link secondary">Search Posts</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 Mahmoud Ahmed</p>
+    </footer>
+</body>
+</html>

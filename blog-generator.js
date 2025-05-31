@@ -167,14 +167,14 @@ class BlogGenerator {
     <meta property="og:title" content="{{TITLE}}">
     <meta property="og:description" content="{{SEO_DESCRIPTION}}">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://yoursite.com/posts/{{CATEGORY}}/{{SLUG}}.html">
+    <meta property="og:url" content="https://mahmoud.ninja/posts/{{CATEGORY}}/{{SLUG}}.html">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="{{TITLE}}">
     <meta name="twitter:description" content="{{SEO_DESCRIPTION}}">
     
-    <link rel="canonical" href="https://yoursite.com/posts/{{CATEGORY}}/{{SLUG}}.html">
+    <link rel="canonical" href="https://mahmoud.ninja/posts/{{CATEGORY}}/{{SLUG}}.html">
     <link rel="stylesheet" href="../../styles.css">
     
     <!-- Structured Data -->
@@ -196,7 +196,7 @@ class BlogGenerator {
         },
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https://yoursite.com/posts/{{CATEGORY}}/{{SLUG}}.html"
+            "@id": "https://mahmoud.ninja/posts/{{CATEGORY}}/{{SLUG}}.html"
         },
         "articleSection": "{{CATEGORY_NAME}}"
     }
