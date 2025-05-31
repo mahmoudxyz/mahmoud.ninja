@@ -1,8 +1,9 @@
 {
+  "framework": null,
   "buildCommand": "npm run build",
   "outputDirectory": ".",
-  "framework": null,
-  "functions": {},
+  "cleanUrls": true,
+  "trailingSlash": false,
   "routes": [
     {
       "src": "/",
@@ -39,8 +40,21 @@
           "value": "nosniff"
         },
         {
-          "key": "X-Frame-Options", 
+          "key": "X-Frame-Options",
           "value": "DENY"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/*.html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
         }
       ]
     }
