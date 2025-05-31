@@ -2,8 +2,8 @@
   "scripts": {
     "new-post": "node blog-generator.js create",
     "generate-sitemap": "node sitemap-generator.js",
-    "build": "npm run generate-sitemap && npm run copy-files",
-    "dev:simple": "python -m http.server 8000",
+    "build": "python dev-server.py 8000 && npm run copy-files",
+    "dev": "python -m http.server 8000",
     "maintenance:on": "node -e \"require('./maintenance-toggle.js'); MaintenanceManager.enable(2)\"",
     "maintenance:off": "node -e \"require('./maintenance-toggle.js'); MaintenanceManager.disable()\"",
     "status": "open status-page.html || start status-page.html"
