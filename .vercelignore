@@ -5,6 +5,13 @@ node_modules
 dev-server.py
 build-script.js
 maintenance-toggle.js
+blog-generator.js
+sitemap-generator.js
 post-template.html
+deploy.js
+test-deployment.js
 README.md
 .DS_Store
+.vercel
+package.json
+package-lock.json
