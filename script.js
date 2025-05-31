@@ -268,3 +268,151 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+// Add these functions to your existing script.js
+
+// Counter animation for hero stats
+function animateCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+    
+    counters.forEach(counter => {
+        const target = counter.getAttribute('data-count');
+        
+        if (target === '∞') {
+            counter.textContent = '∞';
+            return;
+        }
+        
+        const count = parseInt(target);
+        const increment = count / 30;
+        let current = 0;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= count) {
+                counter.textContent = count;
+                clearInterval(timer);
+            } else {
+                counter.textContent = Math.floor(current);
+            }
+        }, 50);
+    });
+}
+
+// Newsletter form handling
+function initNewsletterForm() {
+    const form = document.getElementById('newsletterForm');
+    if (!form) return;
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const button = form.querySelector('button');
+        const buttonText = button.querySelector('.button-text');
+        const buttonLoading = button.querySelector('.button-loading');
+        const email = form.querySelector('input[type="email"]').value;
+        
+        // Show loading state
+        buttonText.style.display = 'none';
+        buttonLoading.style.display = 'inline-block';
+        button.disabled = true;
+        
+        // Simulate API call (replace with actual newsletter signup)
+        try {
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            // Success state
+            buttonText.textContent = 'Subscribed! 🎉';
+            buttonText.style.display = 'inline-block';
+            buttonLoading.style.display = 'none';
+            button.style.background = '#22c55e';
+            
+            console.log('Newsletter signup:', email);
+            
+        } catch (error) {
+            // Error state
+            buttonText.textContent = 'Try again';
+            buttonText.style.display = 'inline-block';
+            buttonLoading.style.display = 'none';
+            button.disabled = false;
+            button.style.background = '#ef4444';
+            
+            setTimeout(() => {
+                button.style.background = '#000';
+                buttonText.textContent = 'Subscribe';
+            }, 3000);
+        }
+    });
+}
+
+// Live time in footer
+function updateFooterTime() {
+    const timeElement = document.getElementById('currentTime');
+    if (!timeElement) return;
+    
+    function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('en-US', {
+            timeZone: 'Africa/Cairo',
+            hour12: false,
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        timeElement.textContent = `${timeString} EET`;
+    }
+    
+    updateTime();
+    setInterval(updateTime, 1000);
+}
+
+// Enhanced featured posts rendering
+function renderFeaturedPosts() {
+    const container = document.querySelector('.featured-grid');
+    if (!container) return;
+    
+    const featured = blogPosts.filter(post => post.featured).slice(0, 2);
+    
+    container.innerHTML = featured.map(post => `
+        <article class="featured-post">
+            <h3 class="post-title">
+                <a href="posts/${post.category}/${post.slug}.html">${post.title}</a>
+            </h3>
+            <div class="post-meta">
+                <span class="date">${formatDate(post.date)}</span>
+                <span class="category">
+                    <a href="category-${post.category}.html">${post.categoryName}</a>
+                </span>
+                <span class="read-time">${post.readTime}</span>
+            </div>
+            <div class="post-excerpt">${post.excerpt}</div>
+            <div class="post-tags">
+                ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            </div>
+        </article>
+    `).join('');
+}
+
+// Smooth scroll for hero scroll indicator
+function initSmoothScroll() {
+    const heroScroll = document.querySelector('.hero-scroll');
+    if (!heroScroll) return;
+    
+    heroScroll.addEventListener('click', () => {
+        document.querySelector('.quick-links').scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+}
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Existing initialization...
+    initializeApp();
+    
+    // New enhancements
+    setTimeout(animateCounters, 500); // Delay for better effect
+    initNewsletterForm();
+    updateFooterTime();
+    renderFeaturedPosts();
+    initSmoothScroll();
+});
