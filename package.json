@@ -1,16 +1,23 @@
 {
+  "name": "minimal-blog",
+  "version": "1.0.0",
+  "description": "A minimal, SEO-friendly blog system",
   "scripts": {
     "new-post": "node blog-generator.js create",
     "generate-sitemap": "node sitemap-generator.js",
-    "build": "npm run generate-sitemap && npm run validate-build",
-    "validate-build": "node -e \"console.log('✅ Build validation passed')\"",
+    "build": "npm run generate-sitemap",
     "dev": "python dev-server.py 8000",
     "dev:simple": "python -m http.server 8000",
-    "preview": "vercel",
-    "deploy": "npm run build && vercel --prod",
-    "postdeploy": "echo '🚀 Deployed successfully!'",
     "maintenance:on": "node -e \"require('./maintenance-toggle.js'); MaintenanceManager.enable(2)\"",
     "maintenance:off": "node -e \"require('./maintenance-toggle.js'); MaintenanceManager.disable()\"",
-    "status": "open status-page.html || start status-page.html"
+    "status": "open status-page.html || start status-page.html",
+    "deploy": "vercel --prod",
+    "preview": "vercel"
+  },
+  "keywords": ["blog", "minimal", "seo", "static"],
+  "author": "Mahmoud Ahmed",
+  "license": "MIT",
+  "devDependencies": {
+    "vercel": "^32.0.0"
   }
 }
